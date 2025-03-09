@@ -59,8 +59,6 @@ docker-compose down
 ### 4. 🛠️ Полезные команды
 Пересобрать контейнер	docker-compose up -d --build
 
-Просмотреть логи контейнера	docker logs -f django_app_tron
-
 Запустить команду внутри контейнера	docker exec -it django_app_tron sh
 
 Создать суперпользователя Django	docker exec -it django_app_tron python manage.py createsuperuser
