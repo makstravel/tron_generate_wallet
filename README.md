@@ -13,6 +13,7 @@ git clone https://github.com/makstravel/tron_generate_wallet.git
 ```
 cd tron_generate_wallet
 ```
+### 2. Создание файла окружения
 создайте файл окружения .env
 ```
 touch .env
@@ -31,6 +32,7 @@ POSTGRES_PASSWORD
 ###  Название базы данных
 POSTGRES_DB
 
+---
 Запустите контейнеры
 
 ```
