@@ -5,7 +5,6 @@
 ## ⚙️ Установка и запуск
 
 ### 1. Клонирование репозитория
-```sh
 Копировать репозиторий
 ```
 git clone https://github.com/makstravel/tron_generate_wallet.git
