@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>TRON Address</title>
+    <style>
+        button { margin: 5px; padding: 8px; cursor: pointer; }
+        .hidden { display: none; }
+    </style>
+    <script>
+        function showSeedPhrase() {
+            let seedPhrase = document.getElementById('seed-phrase');
+            seedPhrase.textContent = seedPhrase.dataset.mnemonic;
+            document.getElementById('show-seed-button').style.display = 'none';
+            document.getElementById('copy-seed-button').classList.remove('hidden');
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Скопировано в буфер обмена!");
+            }).catch(err => console.error("Ошибка копирования:", err));
+        }
+
+        function generateNewAddress() {
+            fetch("/", { method: 'GET' })
+                .then(response => response.text())
+                .then(html => {
+                    let parser = new DOMParser();
+                    let doc = parser.parseFromString(html, 'text/html');
+
+                    document.getElementById('address').textContent = doc.getElementById('address').textContent;
+                    document.getElementById('seed-phrase').textContent = "Скрыта";
+                    document.getElementById('seed-phrase').dataset.mnemonic = doc.getElementById('seed-phrase').dataset.mnemonic;
+                    document.getElementById('qr-code').src = doc.getElementById('qr-code').src;
+                    document.getElementById('show-seed-button').style.display = 'inline-block';
+                    document.getElementById('copy-seed-button').classList.add('hidden');
+                })
+                .catch(error => console.error("Ошибка генерации адреса:", error));
+        }
+    </script>
+</head>
+<body>
+    <h1>Сгенерированный TRON-адрес</h1>
+
+    <table border="1">
+        <tr><th>Поле</th><th>Значение</th></tr>
+        <tr>
+            <td>Адрес</td>
+            <td>
+                <span id="address">{{ data.address }}</span>
+                <button onclick="copyToClipboard(document.getElementById('address').textContent)">Копировать</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Сид-фраза</td>
+            <td>
+                <span id="seed-phrase" data-mnemonic="{{ data.mnemonic }}">Скрыта</span>
+                <button id="show-seed-button" onclick="showSeedPhrase()">Показать</button>
+                <button id="copy-seed-button" class="hidden" onclick="copyToClipboard(document.getElementById('seed-phrase').dataset.mnemonic)">Копировать</button>
+            </td>
+        </tr>
+    </table>
+
+    <h3>QR-код вашего адреса в сети TRON</h3>
+    <img id="qr-code" src="data:image/png;base64,{{ data.qr_code }}" alt="QR Code">
+
+    <br>
+    <button onclick="generateNewAddress()">Сгенерировать новый адрес</button>
+</body>
+</html>

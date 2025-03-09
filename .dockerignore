@@ -1,0 +1,31 @@
+# Исключаем виртуальное окружение
+venv/
+.env
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Игнорируем файлы зависимостей
+Pipfile
+Pipfile.lock
+poetry.lock
+
+# Исключаем IDE-файлы
+.vscode/
+.idea/
+*.iml
+
+# Исключаем файлы логов и временные файлы
+logs/
+*.log
+*.sqlite3
+db.sqlite3
+
+# Исключаем локальные файлы кэша и билдов
+.DS_Store
+*.swp
+*.swo
+node_modules/
+dist/
+build/
