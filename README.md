@@ -6,8 +6,8 @@
 
 ### 1. Клонирование репозитория
 ```sh
-git clone 
-cd 
+git clone https://github.com/makstravel/tron_generate_wallet.git
+cd tron_generate_wallet
 
 В проекте лежит файл entrypoint.sh при сборке приложения он автоматически запустит миграции
 
