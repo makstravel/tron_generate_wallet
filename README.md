@@ -13,13 +13,23 @@ git clone https://github.com/makstravel/tron_generate_wallet.git
 ```
 cd tron_generate_wallet
 ```
-
-В проекте лежит файл entrypoint.sh при сборке приложения он автоматически запустит миграции
-
-если по каким то причинам этого не случилось то запустите команду
+создайте файл окружения .env
 ```
-python manage.py migrate 
+touch .env
 ```
+
+Отредактируйте .env, указав нужные значения (например, для базы данных):
+
+# Хост PostgreSQL
+POSTGRES_HOST
+# Порт PostgreSQL
+POSTGRES_PORT
+# Имя пользователя для подключения
+POSTGRES_USER
+# Пароль пользователя
+POSTGRES_PASSWORD
+# Название базы данных
+POSTGRES_DB
 
 Запустите контейнеры
 
@@ -27,6 +37,12 @@ python manage.py migrate
 docker-compose up -d --build
 ```
 
+В проекте лежит файл entrypoint.sh при сборке приложения он автоматически запустит миграции
+
+если по каким то причинам этого не случилось то запустите команду
+```
+python manage.py migrate 
+```
 Остановка контейнера
 
 ```
